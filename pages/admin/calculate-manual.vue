@@ -319,11 +319,14 @@
     import { ButtonType } from '~/components/attr/ButtonAttr';
     import type { DropdownOption } from '~/components/attr/DropdownAttr';
     import type { GetRouteResponse } from '~/models/legacy/Data';
+    import { useUiStore } from '~/stores/uiStore';
+    import { ToastType } from '~/components/attr/ToastAttr';
 
     definePageMeta({
         layout: "admin"
     })
 
+    const uiStore = useUiStore()
     const kantorTableHeaders = ref([
         "",
         "Nama",
@@ -350,10 +353,10 @@
         const isEdit = selectedKantor.value.id != ""
         const result = isEdit ? await useEditKantor(selectedKantor.value) : await useAddKantor(selectedKantor.value)
         if (isLeft(result)) {
-            alert(unwrapEither(result))
+            uiStore.showToast(unwrapEither(result), ToastType.ERROR)
         } else {
             const message = isEdit ? "Kantor Berhasil diubah" : "Kantor berhasil ditambahkan"
-            alert(message)
+            uiStore.showToast(message, ToastType.SUCCESS)
         }
         closeModal()
     }
@@ -391,10 +394,10 @@
         const isEdit = selectedTkp.value.id != ""
         const result = isEdit ? await useEditTkp(selectedTkp.value) : await useAddTkp(selectedTkp.value)
         if (isLeft(result)) {
-            alert(unwrapEither(result))
+            uiStore.showToast(unwrapEither(result), ToastType.ERROR)
         } else {
             const message = isEdit ? "TKP Berhasil diubah" : "TKP berhasil ditambahkan"
-            alert(message)
+            uiStore.showToast(message, ToastType.SUCCESS)
         }
         closeModal()
     }
@@ -436,7 +439,7 @@
 
     const searchRoute = async () => {
         if (!isMapReady.value) {
-            alert('Tunggu map tampil!')
+            uiStore.showToast('Tunggu map tampil!', ToastType.SUCCESS)
             return
         }
 
@@ -448,7 +451,7 @@
         )
 
         if (isLeft(result)) {
-            console.error(unwrapEither(result))
+            uiStore.showToast(unwrapEither(result), ToastType.ERROR)
         } else {
             const routeResponse = unwrapEither(result) as GetRouteResponse
             selectedResult.value = {

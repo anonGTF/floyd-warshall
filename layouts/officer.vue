@@ -42,6 +42,10 @@
 <script setup lang="ts">
     import { Typography } from '~/components/attr/TextAttr';
     import type { MenuItemArgs } from '~/components/attr/MenuItemAttr';
+    import { useUiStore } from '~/stores/uiStore';
+    import { ToastType } from '~/components/attr/ToastAttr';
+
+    const uiStore = useUiStore()
 
     const officerMenuItems: Ref<Array<MenuItemArgs>> = ref([
         {
@@ -78,7 +82,7 @@
     const logout = async () => {
         const result = await useLogout()
         if (isLeft(result)) {
-            alert(unwrapEither(result))
+            uiStore.showToast(unwrapEither(result), ToastType.ERROR)
         }
     }
 </script>
