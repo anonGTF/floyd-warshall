@@ -22,8 +22,8 @@
                 <TextField
                     v-model="password"
                     :type="passwordVisible ? 'text' : 'password'"
-                    placeholder="Password"
-                    label="Masukkan Password Anda"
+                    placeholder="Masukkan password Anda"
+                    label="Password"
                     :error-message="passwordErrorMessage"
                     :trailing-icon="passwordVisible ? 'mdi:eye' : 'mdi:eye-off'"
                     @trailing-icon-click="togglePasswordVisibility"

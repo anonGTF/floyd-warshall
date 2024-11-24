@@ -44,8 +44,8 @@
                 <TextField
                     v-model="password"
                     :type="passwordVisible ? 'text' : 'password'"
-                    placeholder="Password"
-                    label="Masukkan Password Anda"
+                    placeholder="Masukkan password Anda"
+                    label="Password"
                     :error-message="passwordErrorMessage"
                     :trailing-icon="passwordVisible ? 'mdi:eye' : 'mdi:eye-off'"
                     @trailing-icon-click="togglePasswordVisibility"
@@ -55,8 +55,8 @@
                 <TextField
                     v-model="confirmPassword"
                     :type="passwordVisible ? 'text' : 'password'"
-                    placeholder="Konfirmasi Password"
-                    label="Konfirmasi Password Anda"
+                    placeholder="Konfirmasi password Anda"
+                    label="Konfirmasi Password"
                     :error-message="confirmPasswordErrorMessage"
                     :trailing-icon="passwordVisible ? 'mdi:eye' : 'mdi:eye-off'"
                     @trailing-icon-click="togglePasswordVisibility"

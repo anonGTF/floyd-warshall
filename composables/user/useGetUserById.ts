@@ -13,6 +13,7 @@ export const useGetUserById = async (id: string): Promise<Either<string, User>> 
     const role = data[USER_CONSTANTS.roleAttr]
     const name = data[USER_CONSTANTS.nameAttr]
     const phoneNumber = data[USER_CONSTANTS.phoneNumberAttr]
+    const profilePicture = data[USER_CONSTANTS.profilePictureAttr]
     const email = data[USER_CONSTANTS.emailAttr]
     const isVerified = data[USER_CONSTANTS.isVerifiedAttr]
     const user: User = {
@@ -21,6 +22,7 @@ export const useGetUserById = async (id: string): Promise<Either<string, User>> 
       name,
       email,
       phoneNumber,
+      profilePicture,
       isVerified
     }
     return makeRight(user)

@@ -13,7 +13,9 @@ export const useAddUser = async (
         name,
         role,
         email,
-        isVerified
+        isVerified,
+        phoneNumber: "",
+        profilePicture: ""
     })
     .then(() => makeRight(null))
     .catch((error) => makeLeft(error))

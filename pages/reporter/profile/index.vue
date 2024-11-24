@@ -14,7 +14,7 @@
                 <Text :typography="Typography.Body1">No Telpon</Text>
                 <Text :typography="Typography.Label" class="font-semibold">{{ userStore.user?.phoneNumber }}</Text>
                 <Spacer height="h-6"/>
-                <Button>Edit Profil</Button>
+                <Button to="/reporter/profile/edit">Edit Profil</Button>
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
-import { getDownloadURL, getStorage, ref, uploadBytes, type UploadResult } from "firebase/storage"
+import { getDownloadURL, getStorage, uploadBytes, ref, type UploadResult } from "firebase/storage"
 
 /**
  * @deprecated The method use Firebase Storage which not working right now. needs to migrate to Cloudinary
  */
-export const useUploadEvidence = async (file: File | null | undefined): Promise<Either<string, string>> => {
+export const useUploadProfilePicture = async (file: File | undefined | null): Promise<Either<string, string>> => {
     if (file == null || file == undefined) {
         return Promise.reject(makeLeft("File tidak terdeteksi"))
     }

@@ -4,6 +4,7 @@ export const USER_CONSTANTS = {
     nameAttr: 'name',
     emailAttr: 'email',
     phoneNumberAttr: 'phoneNumber',
+    profilePictureAttr: 'profilePicture',
     isVerifiedAttr: 'isVerified'
 }
 
