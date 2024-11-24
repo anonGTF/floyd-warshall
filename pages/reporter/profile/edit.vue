@@ -56,6 +56,7 @@
         <Spacer height="h-6"/>
         <Button 
             full-width
+            :loading="isLoading"
             @click="save"
         >
             Simpan
@@ -139,7 +140,7 @@
                 } else {
                     updatedUser = {
                         ...updatedUser,
-                        email: unwrapEither(emailResult)
+                        email: email.value
                     }
                 }
             }

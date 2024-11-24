@@ -5,6 +5,7 @@ export const useAddUser = async (
     name: string, 
     role: string, 
     email: string,
+    officeId: string,
     isVerified: boolean
 ): Promise<Either<string, null>> => {
     const db = useFirestore()
@@ -14,6 +15,7 @@ export const useAddUser = async (
         role,
         email,
         isVerified,
+        officeId,
         phoneNumber: "",
         profilePicture: ""
     })

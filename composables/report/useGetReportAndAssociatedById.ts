@@ -75,6 +75,7 @@ export const useGetReportAndAssociatedById = async (id: string): Promise<Either<
             email: reporterData[USER_CONSTANTS.emailAttr],
             phoneNumber: reporterData[USER_CONSTANTS.phoneNumberAttr],
             profilePicture: reportData[USER_CONSTANTS.profilePictureAttr],
+            officeId: reportData[USER_CONSTANTS.officeIdAttr],
             isVerified: reporterData[USER_CONSTANTS.isVerifiedAttr]
         } satisfies User
 

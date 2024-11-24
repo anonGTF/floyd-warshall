@@ -5,5 +5,6 @@ export type User = {
     email: string,
     phoneNumber: string,
     profilePicture: string,
+    officeId: string,
     isVerified: boolean
 }

@@ -4,8 +4,10 @@ import type { Report } from "~/models/report/Report"
 
 export const useGetAllReportsByStatus = (ops: WhereFilterOp, status: string[]): Ref<Report[]> => {
     const db = useFirestore()
+    const userStore = useUserStore()
+    const officeId = userStore.user?.officeId ?? ""
     const collectionRef = collection(db, REPORT_CONSTANTS.collectionName)
-    const queryRef = query(collectionRef, where(REPORT_CONSTANTS.statusAttr, ops, status))
+    const queryRef = query(collectionRef, where(REPORT_CONSTANTS.statusAttr, ops, status), where(REPORT_CONSTANTS.officeIdAttr, "==", officeId))
     const reportList = useCollection(queryRef.withConverter<Report, DocumentData>({
         fromFirestore: (snapshot) => {
             const data = snapshot.data()

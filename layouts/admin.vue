@@ -71,6 +71,12 @@
             icon: "mdi:update"
         },
         {
+            label: "Verifikasi Akun",
+            route: "/admin/users",
+            icon: "mdi:account-supervisor-outline",
+            selectedIcon: "mdi:account-supervisor"
+        },
+        {
             label: "Hitung Manual",
             route: "/admin/calculate-manual",
             icon: "mdi:calculator-variant-outline",

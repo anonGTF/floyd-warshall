@@ -40,6 +40,16 @@
                     :options="roleOptions"
                     :error-message="roleErrorMessage"
                 />
+                <template v-if="role == 'Admin' || role == 'Petugas'">
+                    <Spacer height="h-4" />
+                    <DropdownSelector
+                        v-model="selectedOfficeIndex"
+                        label="Kantor"
+                        placeholder="Pilih kantor Anda"
+                        :options="officeDropdownOptions"
+                        :error-message="officeErrorMessage"
+                    />
+                </template>
                 <Spacer height="h-4" />
                 <TextField
                     v-model="password"
@@ -94,6 +104,7 @@
     import { ButtonType } from '~/components/attr/ButtonAttr';
     import { Typography } from '~/components/attr/TextAttr'
     import type { UserCredential } from 'firebase/auth';
+    import { ToastType } from '~/components/attr/ToastAttr';
 
     const email = ref('')
     const name = ref('')
@@ -109,8 +120,16 @@
     const alertMessage = ref('')
     const passwordVisible = ref(false)
     const roleOptions = ["Reporter", "Petugas", "Admin"]
+    const offices = useGetAllKantor()
+    const officeDropdownOptions = computed(() => offices.value.map((office) => ({
+        label: office.nama,
+        data: office
+    })))
+    const selectedOfficeIndex = ref(-1)
+    const officeErrorMessage = ref("")
 
     const userStore = useUserStore()
+    const uiStore = useUiStore()
 
     const login = async () => {
         emailErrorMessage.value = ''
@@ -146,6 +165,10 @@
             confirmPassword.value = 'Konfirmasi password tidak sama dengan password di atas'
             isValid = false
         }
+        if ((role.value == "Admin" || role.value == "Petugas") && selectedOfficeIndex.value == -1) {
+            officeErrorMessage.value = 'Kantor harus diisi'
+            isValid = false
+        }
 
         if (!isValid) return
 
@@ -165,6 +188,7 @@
             name.value,
             userRole,
             email.value,
+            getOfficeId(),
             userRole == "reporter"
         )
         if (isLeft(userCreationResult)) {
@@ -186,7 +210,7 @@
 
         const user = unwrapEither(userResult) as User
         if (!user.isVerified) {
-            alertMessage.value = "Akun berhasil dibuat! tunggu sampai admin memverifikasi akun Anda."
+            uiStore.showToast("Akun berhasil dibuat! tunggu sampai admin memverifikasi akun Anda.", ToastType.SUCCESS)
             isLoading.value = false
             await useLogout()
             return
@@ -197,6 +221,8 @@
     }
 
     const getRole = (): string => (role.value == "Admin") ? "admin" : (role.value == "Petugas") ? "officer" : "reporter"
+
+    const getOfficeId = () => (role.value == "Admin" || role.value == "Petugas") ? offices.value[selectedOfficeIndex.value].id : ""
 
     const togglePasswordVisibility = () => { passwordVisible.value = !passwordVisible.value }
 </script>
