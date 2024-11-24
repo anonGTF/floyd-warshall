@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white rounded-2xl m-16 p-8">
-        <Text :typography="Typography.H1" class="text-primary">Detail Laporan</Text>
+        <Text :typography="Typography.H1" class="text-primary">Lacak Laporan</Text>
         <Spacer height="h-8"/>
         <ReadOnlyTextField
             :text="reportDetail?.reporter.name"
@@ -111,7 +111,7 @@
     import { ToastType } from '~/components/attr/ToastAttr';
     
     definePageMeta({
-        layout: "officer"
+        layout: "reporter"
     })
 
     const route = useRoute()

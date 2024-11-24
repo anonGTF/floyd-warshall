@@ -1,8 +1,8 @@
 <template>
     <div class="drawer lg:drawer-open">
         <input v-model="isDrawerOpen" id="reporter-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content bg-background-gray flex flex-col h-svh lg:h-auto">
-            <label for="officer-drawer" class="drawer-button btn btn-square lg:hidden">
+        <div class="drawer-content bg-background-gray flex flex-col min-h-svh lg:h-auto">
+            <label for="reporter-drawer" class="drawer-button btn btn-square lg:hidden m-4 bg-white">
                 <Icon name="mdi:menu" size="24px"/>
             </label>
             <div class="flex-1">
@@ -14,12 +14,12 @@
                 </Text>
             </div>
         </div>
-        <div class="drawer-side border-e border-border-divider bg-primary">
+        <div class="drawer-side border-e border-border-divider bg-transparent lg:bg-primary">
             <label for="reporter-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="flex justify-center w-full min-h-[5dvh] p-6">
+            <div class="flex justify-center w-80 lg:w-full min-h-[5dvh] p-6">
                 <img src="/images/basarnas-logo.png"/>
             </div>
-            <ul class="menu h-svh lg:h-auto w-80 pt-4 gap-4 px-4">
+            <ul class="menu min-h-svh lg:h-auto w-80 pt-4 gap-4 px-4 bg-primary">
                 <li class="menu-title -ms-4 text-white">MENU</li>
                 <li v-for="menu in menuItems" :key="menu.label">
                     <MenuItem

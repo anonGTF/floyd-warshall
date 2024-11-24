@@ -47,16 +47,12 @@ export const useGetReportAndAssociatedById = async (id: string): Promise<Either<
 
         const [packageDoc, officeDoc, reporterDoc] = results
 
-        console.log(packageDoc.data())
-
         const packageData = packageDoc.data()!
         const packageDetail = {
             id: packageDoc.id,
             title: packageData[PACKAGE_CONSTANTS.titleAttr],
             stock: packageData[PACKAGE_CONSTANTS.stockAttr]
         } satisfies Package
-
-        console.log(packageDetail)
 
         const officeData = officeDoc.data()!
         const office = {
@@ -78,6 +74,7 @@ export const useGetReportAndAssociatedById = async (id: string): Promise<Either<
             name: reporterData[USER_CONSTANTS.nameAttr],
             email: reporterData[USER_CONSTANTS.emailAttr],
             phoneNumber: reporterData[USER_CONSTANTS.phoneNumberAttr],
+            profilePicture: reportData[USER_CONSTANTS.profilePictureAttr],
             isVerified: reporterData[USER_CONSTANTS.isVerifiedAttr]
         } satisfies User
 

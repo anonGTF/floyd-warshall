@@ -87,10 +87,6 @@
 
     const reportStore = useReportStore()
 
-    watch(lat, () => {
-        console.log(lat.value)
-    })
-
     const createReport = async () => {
         isLoading.value = true
         alertErrorMessage.value = ""

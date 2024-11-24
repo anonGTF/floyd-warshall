@@ -1,8 +1,8 @@
 <template>
     <div class="drawer lg:drawer-open">
         <input v-model="isDrawerOpen" id="admin-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content bg-background-gray flex flex-col h-svh lg:h-auto">
-            <label for="admin-drawer" class="drawer-button btn btn-square lg:hidden m-4">
+        <div class="drawer-content bg-background-gray flex flex-col min-h-svh lg:h-auto">
+            <label for="admin-drawer" class="drawer-button btn btn-square lg:hidden m-4 bg-white">
                 <Icon name="mdi:menu" size="24px"/>
             </label>
             <div class="flex-1">
