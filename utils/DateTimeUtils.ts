@@ -14,3 +14,11 @@ export const getFileName = (currentDate: Date) => {
   const endDate = `${new Date(year, currentDate.getMonth() + 1, 0).getDate()} ${month} ${year}`
   return `Data Semua Laporan Tanggal ${startDate} - ${endDate}`
 }
+
+export const getTitleName = (currentDate: Date) => {
+  const year = currentDate.getFullYear()
+  const month = currentDate.toLocaleString('id-ID', { month: 'long' })
+  const endDate = `${new Date(year, currentDate.getMonth() + 1, 0).getDate()} ${month} ${year}`
+  const endDateFormatted = useDateFormat(endDate, "DD MMMM YYYY", { locales: 'id-ID' })
+  return `Data Laporan 1 Bulan Terakhir 1 - ${endDateFormatted.value}`
+}
