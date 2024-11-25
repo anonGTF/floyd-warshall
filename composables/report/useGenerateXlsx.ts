@@ -80,6 +80,6 @@ export const useGenerateXlsx = async (data: ReportDetail[]) => {
     
     await writeXlsxFile(data, {
         schema,
-        fileName: 'ReportData.xlsx',
+        fileName: `${getFileName(useNow().value)}.xlsx`,
     });
 }

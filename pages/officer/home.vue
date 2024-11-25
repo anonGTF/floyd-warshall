@@ -38,6 +38,7 @@
             <div class="flex flex-row gap-4">
                 <Button
                     class="flex-1"
+                    @click="generatePdf"
                 >
                     <Icon name="mdi:file-pdf-box" size="1.8rem"/> Download PDF
                 </Button>
@@ -95,4 +96,5 @@
     })
 
     const generateXlsx = async () => { await useGenerateXlsx(reports.value) }
+    const generatePdf = () => { useGeneratePdf(reports.value) }
 </script>
