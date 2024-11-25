@@ -57,7 +57,7 @@
         <Button 
             full-width
             :loading="isLoading"
-            @click="save"
+            @click="wrapWithConfirmation"
         >
             Simpan
         </Button>
@@ -65,7 +65,8 @@
 </template>
 
 <script setup lang="ts">
-    import { Typography } from '~/components/attr/TextAttr';
+    import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr';
+import { Typography } from '~/components/attr/TextAttr';
     import { ToastType } from '~/components/attr/ToastAttr';
 
     definePageMeta({
@@ -89,6 +90,19 @@
     const alertErrorMessage = ref("")
 
     const togglePasswordVisibility = () => { passwordVisible.value = !passwordVisible.value }
+
+    const wrapWithConfirmation = () => {
+        uiStore.confirm(
+            "Simpan Perubahan Data Akun",
+            "Apakah Anda yakin ingin mengubah data akun?",
+            ConfirmationType.INFO,
+            async () => {
+                await save()
+                uiStore.hideConfirmationModal()
+            },
+            () => { uiStore.hideConfirmationModal() }
+        )
+    }
 
     const save = async () => {
         isLoading.value = true
