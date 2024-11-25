@@ -59,7 +59,7 @@
         <Button
             full-width
             :loading="isLoading"
-            @click="createReport"
+            @click="wrapWithConfirmation"
         >
             Buat Laporan
         </Button>
@@ -69,6 +69,7 @@
 <script setup lang="ts">
     import type { Report } from '~/models/report/Report'
     import { Typography } from '~/components/attr/TextAttr';
+import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr';
 
     definePageMeta({
         layout: "reporter"
@@ -86,6 +87,22 @@
     const isLoading = ref(false)
 
     const reportStore = useReportStore()
+    const uiStore = useUiStore()
+
+    const wrapWithConfirmation = () => {
+        uiStore.confirm(
+            "Buat Laporan",
+            "Anda yakin ingin mengirim laporan?",
+            ConfirmationType.INFO,
+            async () => {
+                await createReport()
+                uiStore.hideConfirmationModal()
+            },
+            () => {
+                uiStore.hideConfirmationModal()
+            }
+        )
+    }
 
     const createReport = async () => {
         isLoading.value = true

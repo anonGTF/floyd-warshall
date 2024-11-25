@@ -44,6 +44,7 @@
     import type { MenuItemArgs } from '~/components/attr/MenuItemAttr';
     import { useUiStore } from '~/stores/uiStore';
     import { ToastType } from '~/components/attr/ToastAttr';
+    import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr';
 
     const uiStore = useUiStore()
 
@@ -79,11 +80,22 @@
 
     const toggleDrawer = () => { isDrawerOpen.value = !isDrawerOpen.value }
 
-    const logout = async () => {
-        const result = await useLogout()
-        if (isLeft(result)) {
-            uiStore.showToast(unwrapEither(result), ToastType.ERROR)
-        }
+    const logout = () => {
+        uiStore.confirm(
+            "Keluar",
+            "Anda akan keluar dari website ini",
+            ConfirmationType.INFO,
+            async () => {
+                const result = await useLogout()
+                if (isLeft(result)) {
+                    uiStore.showToast(unwrapEither(result), ToastType.ERROR)
+                }
+                uiStore.hideConfirmationModal()
+            },
+            () => {
+                uiStore.hideConfirmationModal()
+            }
+        )
     }
 </script>
 

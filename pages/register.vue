@@ -76,7 +76,7 @@
                 <Button 
                     :loading="isLoading"
                     full-width
-                    @click="login"
+                    @click="wrapWithConfirm"
                 >
                     Register
                 </Button>
@@ -105,6 +105,7 @@
     import { Typography } from '~/components/attr/TextAttr'
     import type { UserCredential } from 'firebase/auth';
     import { ToastType } from '~/components/attr/ToastAttr';
+    import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr'
 
     const email = ref('')
     const name = ref('')
@@ -131,7 +132,20 @@
     const userStore = useUserStore()
     const uiStore = useUiStore()
 
-    const login = async () => {
+    const wrapWithConfirm = () => {
+        uiStore.confirm(
+            "Konfirmasi Pembuatan Akun",
+            "Apakah Anda yakin data akun sudah sesuai?",
+            ConfirmationType.INFO,
+            async () => {
+                await register()
+                uiStore.hideConfirmationModal()
+            },
+            () => { uiStore.hideConfirmationModal() }
+        )
+    }
+
+    const register = async () => {
         emailErrorMessage.value = ''
         nameErrorMessage.value = ''
         roleErrorMessage.value = ''
