@@ -10,7 +10,7 @@
             <img src="/images/indonesia-map.png" class="object-cover"/>
         </div>
         <div class="flex-none mt-16 mb-4 mx-16 bg-white border border-primary rounded-2xl p-8">
-            <Text :typography="Typography.H1" class="font-semibold text-center">{{ getTitleName(new Date()) }}</Text>
+            <Text :typography="Typography.H1" class="font-semibold text-center">Data Laporan 1 Bulan Terakhir</Text>
             <Spacer height="h-10"/>
             <div class="flex flex-row">
                 <div class="flex-none flex flex-col">
@@ -56,7 +56,6 @@
 <script setup lang="ts">
     import { Typography } from '~/components/attr/TextAttr';
     import { ToastType } from '~/components/attr/ToastAttr';
-import { getTitleName } from '~/utils/DateTimeUtils';
 
     definePageMeta({
         layout: "admin"
