@@ -10,7 +10,7 @@
             <img src="/images/indonesia-map.png" class="object-cover"/>
         </div>
         <div class="flex-none mt-16 mb-4 mx-16 bg-white border border-primary rounded-2xl p-8">
-            <Text :typography="Typography.H1" class="font-semibold text-center">{{ getTitleName(useNow().value) }}</Text>
+            <Text :typography="Typography.H1" class="font-semibold text-center">{{ getTitleName(new Date()) }}</Text>
             <Spacer height="h-10"/>
             <div class="flex flex-row">
                 <div class="flex-none flex flex-col">
