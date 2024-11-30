@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Cari Rute</Text>
         <Spacer height="h-8"/>
         
@@ -98,7 +98,7 @@
 
         </div>
     </div>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <div class="flex flex-row justify-between">
             <Text :typography="Typography.H1" class="text-primary">Data Kantor</Text>
             <Button @click="openKantorModal(null)">
@@ -141,7 +141,7 @@
             </tr>
         </Table>
     </div>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <div class="flex flex-row justify-between">
             <Text :typography="Typography.H1" class="text-primary">Data TKP</Text>
             <Button @click="openTkpModal(null)">

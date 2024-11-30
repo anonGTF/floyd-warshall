@@ -4,29 +4,30 @@
             v-model="search"
             placeholder="Cari Lokasi"
             trailing-icon="mdi:magnify"
-            class="mx-16 my-8"
+            class="mx-4 lg:mx-16 my-8"
         />
-        <div class="flex items-center justify-center w-full mx-16">
+        <div class="flex items-center justify-center mx-4 lg:mx-16">
             <img src="/images/indonesia-map.png" class="object-cover"/>
         </div>
-        <div class="flex-none mt-16 mb-4 mx-16 bg-white border border-primary rounded-2xl p-8">
+        <div class="flex-none mt-16 mb-4 mx-4 lg:mx-16 bg-white border border-primary rounded-2xl p-8">
             <Text :typography="Typography.H1" class="font-semibold text-center">Data Laporan 1 Bulan Terakhir</Text>
             <Spacer height="h-10"/>
-            <div class="flex flex-row">
-                <div class="flex-none flex flex-col">
-                    <Text :typography="Typography.H2">Total Laporan Masuk</Text>
-                    <div class="w-full rounded-lg bg-gray-100 p-4 mt-2 flex justify-center items-center grow">
-                        <Text  class=" text-5xl font-bold text-primary">{{ reports.length }}</Text>
+            <div class="flex flex-row flex-wrap gap-12">
+                <div class="flex-1 lg:flex-none flex flex-col lg:flex-row">
+                    <div class="flex flex-col">
+                        <Text :typography="Typography.H2">Total Laporan Masuk</Text>
+                        <div class="w-full rounded-lg bg-gray-100 p-4 mt-2 flex justify-center items-center grow">
+                            <Text  class=" text-5xl font-bold text-primary">{{ reports.length }}</Text>
+                        </div>
+                    </div>
+                    <Spacer width="w-6"/>
+                    <div class="flex flex-col">
+                        <Text :typography="Typography.H2">Total Laporan Selesai</Text>
+                        <div class="w-full rounded-lg bg-gray-100 p-4 mt-2 flex justify-center items-center grow">
+                            <Text class=" text-5xl font-bold text-success">{{ doneReports.length }}</Text>
+                        </div>
                     </div>
                 </div>
-                <Spacer width="w-6"/>
-                <div class="flex-none flex flex-col">
-                    <Text :typography="Typography.H2">Total Laporan Selesai</Text>
-                    <div class="w-full rounded-lg bg-gray-100 p-4 mt-2 flex justify-center items-center grow">
-                        <Text class=" text-5xl font-bold text-success">{{ doneReports.length }}</Text>
-                    </div>
-                </div>
-                <Spacer width="w-12"/>
                 <div class="flex-1 grid grid-rows-3 grid-flow-col gap-4">
                     <div v-for="[category, total] in totalReportByCategory" class="flex flex-row gap-2 items-center">
                         <Text class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center border border-border-primary" :typography="Typography.H2">{{ total }}</Text>

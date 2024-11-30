@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Profil Pengguna</Text>
         <Spacer height="h-8"/>
         <div class="flex flex-row gap-8">

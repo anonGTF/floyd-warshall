@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Laporan Masuk</Text>
         <Spacer height="h-8"/>
         <Table
@@ -34,7 +34,7 @@
             </tr>
         </Table>
     </div>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Laporan Dalam Proses</Text>
         <Spacer height="h-8"/>
         <Table
@@ -69,7 +69,7 @@
             </tr>
         </Table>
     </div>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Laporan Selesai</Text>
         <Spacer height="h-8"/>
         <Table

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Update Penyelesaian Laporan Bencana {{ reportDetail?.report.title }}</Text>
         <Spacer height="h-4"/>
         <InlineAlert :alert-message="alertErrorMessage"/>

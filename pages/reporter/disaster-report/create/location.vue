@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-2xl m-16 p-8">
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
         <Text :typography="Typography.H1" class="text-primary">Koordinat Bencana</Text>
         <Spacer height="h-4"/>
         <InlineAlert :alert-message="alertErrorMessage"/>
@@ -69,7 +69,7 @@
 <script setup lang="ts">
     import type { Report } from '~/models/report/Report'
     import { Typography } from '~/components/attr/TextAttr';
-import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr';
+    import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr';
 
     definePageMeta({
         layout: "reporter"
