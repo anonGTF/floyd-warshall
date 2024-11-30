@@ -138,8 +138,8 @@
             "Apakah Anda yakin data akun sudah sesuai?",
             ConfirmationType.INFO,
             async () => {
-                await register()
                 uiStore.hideConfirmationModal()
+                await register()
             },
             () => { uiStore.hideConfirmationModal() }
         )

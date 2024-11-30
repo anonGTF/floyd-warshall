@@ -97,8 +97,8 @@ import { Typography } from '~/components/attr/TextAttr';
             "Apakah Anda yakin ingin mengubah data akun?",
             ConfirmationType.INFO,
             async () => {
-                await save()
                 uiStore.hideConfirmationModal()
+                await save()
             },
             () => { uiStore.hideConfirmationModal() }
         )

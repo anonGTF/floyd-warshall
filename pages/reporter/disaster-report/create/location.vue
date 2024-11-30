@@ -95,8 +95,8 @@ import { ConfirmationType } from '~/components/attr/ConfirmationModalAttr';
             "Anda yakin ingin mengirim laporan?",
             ConfirmationType.INFO,
             async () => {
-                await createReport()
                 uiStore.hideConfirmationModal()
+                await createReport()
             },
             () => {
                 uiStore.hideConfirmationModal()
