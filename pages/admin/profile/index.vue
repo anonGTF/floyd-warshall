@@ -3,7 +3,13 @@
         <Text :typography="Typography.H1" class="text-primary">Profil Pengguna</Text>
         <Spacer height="h-8"/>
         <div class="flex flex-row gap-8">
-            <div class="h-80 w-80 bg-background-gray rounded-3xl"></div>
+            <img 
+                v-if="userStore.user?.profilePicture != ''"
+                :src="userStore.user?.profilePicture" 
+                alt="Foto profil" 
+                class="h-80 w-80 rounded-3xl object-cover"
+            />
+            <div v-else class="h-80 w-80 bg-background-gray rounded-3xl"></div>
             <div>
                 <Text :typography="Typography.Body1">Nama</Text>
                 <Text :typography="Typography.Label" class="font-semibold">{{ userStore.user?.name }}</Text>
