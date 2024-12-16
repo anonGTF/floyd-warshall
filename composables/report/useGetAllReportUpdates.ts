@@ -12,6 +12,7 @@ export const useGetAllReportUpdates = async (reportId: string): Promise<Either<s
                 assignmentReceivedData: data[UPDATE_REPORT_CONSTANTS.assignmentReceivedDataAttr],
                 arrivalData: data[UPDATE_REPORT_CONSTANTS.arrivalDataAttr],
                 completionData: data[UPDATE_REPORT_CONSTANTS.completionDataAttr],
+                declineData: data[UPDATE_REPORT_CONSTANTS.declineDataAttr],
                 createdAt: parseToDate(data[UPDATE_REPORT_CONSTANTS.createdAtAttr])
             } satisfies UpdateReport
         })

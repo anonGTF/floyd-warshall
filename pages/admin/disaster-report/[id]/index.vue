@@ -93,18 +93,61 @@
             </div>
         </div>
         <Spacer height="h-6"/>
-        <Button
-            full-width
-            :loading="isLoading"
-            @click="acceptReport"
-        >
-            Terima Laporan
-        </Button>
+        <div class="flex flex-row gap-4">
+            <Button
+                :type="ButtonType.Secondary"
+                :loading="isLoading"
+                @click="showDeclineModal = true"
+                class="flex-1"
+            >
+                Tolak Laporan
+            </Button>
+            <Button
+                :loading="isLoading"
+                @click="acceptReport"
+                class="flex-1"
+            >
+                Terima Laporan
+            </Button>
+        </div>
     </div>
+    <dialog 
+        class="modal modal-bottom sm:modal-middle"
+        :class="{ 'modal-open': showDeclineModal }"
+    >
+        <div class="modal-box">
+            <Text :typography="Typography.H2">Masukkan Alasan Penolakan</Text>
+            <Spacer height="h-4" />
+            <TextField
+                v-model="declineReason"
+                label="Alasan Penolakan"
+                placeholder="Masukkan alasan penolakan di sini"
+                :error-message="declineReasonErrorMessage"
+            />
+            <Spacer height="h-6"/>
+            <div class="flex flex-row gap-2 w-full">
+                <Button 
+                    :type="ButtonType.Secondary"
+                    class="flex-1"
+                    @click="showDeclineModal = false"
+                >
+                    Batalkan
+                </Button>
+                <Button
+                    class="flex-1"
+                    @click="declineReport"
+                >
+                    Tolak Laporan
+                </Button>
+            </div>
+        </div>
+    </dialog>
 </template>
 
 <script setup lang="ts">
+    import { ButtonType } from '~/components/attr/ButtonAttr';
     import { Typography } from '~/components/attr/TextAttr';
+    import Button from '~/components/Button.vue';
     import { useGetReportAndAssociatedById } from '~/composables/report/useGetReportAndAssociatedById';
     import type { ReportDetail } from '~/models/report/ReportDetail';
 
@@ -119,6 +162,9 @@
     const isLoading = ref(false)
     const map = ref()
     const polyline = ref()
+    const showDeclineModal = ref(false)
+    const declineReason = ref("")
+    const declineReasonErrorMessage = ref("")
 
     onMounted(async () => {
         const result = await useGetReportAndAssociatedById(route.params.id as string)
@@ -147,6 +193,46 @@
 
         if (isLeft(result)) {
             alertErrorMessage.value = unwrapEither(result)
+            isLoading.value = false
+            return
+        } else {
+            navigateTo("/admin/disaster-report")
+        }
+    }
+
+    const declineReport = async () => {
+        if (reportDetail.value?.report == null) {
+            alertErrorMessage.value = "Detail laporan tidak ada"
+            return
+        }
+
+        declineReasonErrorMessage.value = ""
+        if (declineReason.value == "") {
+            declineReasonErrorMessage.value = "Alasan penolakan harus diisi!"
+            return
+        }
+
+        isLoading.value = true
+        const result = await useEditReport({
+            ...reportDetail.value.report,
+            status: "DECLINED"
+        })
+
+        if (isLeft(result)) {
+            alertErrorMessage.value = unwrapEither(result)
+            isLoading.value = false
+            return
+        }
+
+        const updateResult = await useAddUpdateReport(reportDetail.value.report.id, {
+            id: "",
+            declineData: {
+                reason: declineReason.value
+            }
+        } satisfies UpdateReport)
+
+        if (isLeft(updateResult)) {
+            alertErrorMessage.value = unwrapEither(updateResult)
             isLoading.value = false
             return
         } else {

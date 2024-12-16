@@ -28,6 +28,8 @@
                 return "Proses Penanganan"
             case "DONE":
                 return "Laporan Telah Diselesaikan"
+            case "DECLINED":
+                return "Laporan Ditolak"
         }
     })
 
@@ -45,6 +47,8 @@
                 return "bg-warning"
             case "DONE":
                 return "bg-success"
+            case "DECLINED":
+                return "bg-error"
         }
     })
 </script>

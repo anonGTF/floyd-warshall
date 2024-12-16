@@ -3,6 +3,7 @@ export type UpdateReport = {
     assignmentReceivedData?: AssignmentReceivedData,
     arrivalData?: ArrivalData,
     completionData?: CompletionData,
+    declineData?: DeclineData,
     createdAt?: Date
 }
 
@@ -22,4 +23,8 @@ export type CompletionData = {
     blocker: string,
     accidentDetail: string,
     evidence: string
+}
+
+export type DeclineData = {
+    reason: string
 }

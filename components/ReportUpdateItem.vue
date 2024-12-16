@@ -82,7 +82,20 @@
                     label="Detail Kejadian"
                     :text="updateData.completionData.accidentDetail"
                 />
-        </template>
+            </template>
+            <template v-if="updateData.declineData != null">
+                <div class="min-h-12 flex flex-row gap-2 items-center justify-between">
+                    <div>
+                        <Text class="font-semibold" color="text-content-secondary">{{ formattedDate }}</Text>
+                        <Text :typography="Typography.Label" class="font-bold" color="text-black">{{ formattedTime }} WIB</Text>
+                    </div>
+                    <StatusCard status="DECLINED" class="mb-0"/>
+                </div>
+                <ReadOnlyTextField
+                    label="Alasan Penolakan"
+                    :text="updateData.declineData.reason"
+                />
+            </template>
         </div>
     </div>
 </template>
@@ -109,4 +122,8 @@
 
     const formattedDate = useDateFormat(props.updateData.createdAt, 'dddd, DD MMM YYYY', { locales: 'id-ID' })
     const formattedTime = useDateFormat(props.updateData.createdAt, 'HH:mm', { locales: 'id-ID' })
+
+    onMounted(() => {
+        console.log(props.updateData)
+    })
 </script>

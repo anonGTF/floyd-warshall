@@ -63,6 +63,7 @@ export const UPDATE_REPORT_CONSTANTS = {
     assignmentReceivedDataAttr: 'assignmentReceivedData',
     arrivalDataAttr: 'arrivalData',
     completionDataAttr: 'completionData',
+    declineDataAttr: 'declineData',
     createdAtAttr: 'createdAt'
 }
 

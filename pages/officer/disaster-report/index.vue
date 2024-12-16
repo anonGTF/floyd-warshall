@@ -104,6 +104,41 @@
             </tr>
         </Table>
     </div>
+    <div class="bg-white rounded-2xl m-4 lg:m-16 p-8">
+        <Text :typography="Typography.H1" class="text-primary">Laporan Ditolak</Text>
+        <Spacer height="h-8"/>
+        <Table
+            :headers="reportTableHeaders"
+            :is-empty="declinedReports.length == 0"
+        >
+            <tr v-for="(data, index) in declinedReports">
+                <th>
+                    <Text :typography="Typography.Body2" class="font-semibold text-content-primary">{{ index + 1 }}</Text>
+                </th>
+                <td>
+                    <Text :typography="Typography.Body2">{{ data.title }}</Text>
+                </td>
+                <td>
+                    <Text :typography="Typography.Body2">{{ data.description }}</Text>
+                </td>
+                <td>
+                    <Text :typography="Typography.Body2">{{ data.address }}</Text>
+                </td>
+                <td>
+                    <StatusCard :status="data.status"/>
+                </td>
+                <td class="flex justify-end">
+                    <Button 
+                        :type="ButtonType.Outlined" 
+                        dense
+                        :to="`/officer/disaster-report/${data.id}/detail`"
+                    >
+                        Detail
+                    </Button>
+                </td>
+            </tr>
+        </Table>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -124,8 +159,9 @@
     ])
 
     const newReports = useGetAllReportsByStatus("in", ["ACCEPTED"])
-    const existingReports = useGetAllReportsByStatus("not-in", ["ACCEPTED", "TODO", "DONE"])
+    const existingReports = useGetAllReportsByStatus("not-in", ["ACCEPTED", "TODO", "DONE", "DECLINED"])
     const completedReports = useGetAllReportsByStatus("in", ["DONE"])
+    const declinedReports = useGetAllReportsByStatus("in", ["DECLINED"])
 
     const getUpdateLink = (status: string, id: string) => (status == "RECEIVED-BY-OFFICER") ? 
         `/officer/disaster-report/${id}/arrived` : 
