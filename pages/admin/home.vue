@@ -10,7 +10,14 @@
             <img src="/images/indonesia-map.png" class="object-cover"/>
         </div>
         <div class="flex-none mt-16 mb-4 mx-4 lg:mx-16 bg-white border border-primary rounded-2xl p-8">
-            <Text :typography="Typography.H1" class="font-semibold text-center">Data Laporan 1 Bulan Terakhir</Text>
+            <div class="flex flex-col xl:flex-row gap-4 items-center">
+                <Text :typography="Typography.H1" class="font-semibold flex-1">Rekap Data Laporan</Text>
+                <div class="flex flex-row gap-4 items-center">
+                    <DatePicker v-model="startDate"/>
+                    <Text class=" text-3xl">-</Text>
+                    <DatePicker v-model="endDate"/>
+                </div>
+            </div>
             <Spacer height="h-10"/>
             <div class="flex flex-row flex-wrap gap-12">
                 <div class="flex-1 lg:flex-none flex flex-col lg:flex-row">
@@ -86,9 +93,12 @@
         })
         return categoryToTotalMap
     })
+    const now = new Date()
+    const startDate = ref<Date>(now)
+    const endDate = ref<Date>(now)
 
-    onMounted(async () => {
-        const result = await useGetReportsAndAssociatedByDate()
+    watch([startDate, endDate], async () => {
+        const result = await useGetReportsAndAssociatedByDate(startDate.value, endDate.value)
         if (isLeft(result)) {
             uiStore.showToast(unwrapEither(result), ToastType.ERROR)
         } else {
@@ -96,6 +106,10 @@
         }
     })
 
-    const generateXlsx = async () => { await useGenerateXlsx(reports.value) }
-    const generatePdf = () => { useGeneratePdf(reports.value) }
+    onMounted(async () => {
+        startDate.value = new Date(now.getFullYear(), now.getMonth(), 1)
+    })
+
+    const generateXlsx = async () => { await useGenerateXlsx(reports.value, startDate.value, endDate.value) }
+    const generatePdf = () => { useGeneratePdf(reports.value, startDate.value, endDate.value) }
 </script>

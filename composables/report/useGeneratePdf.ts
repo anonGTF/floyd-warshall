@@ -1,7 +1,7 @@
 import jsPDF from 'jspdf'
 import autoTable, { type RowInput } from 'jspdf-autotable'
 
-export const useGeneratePdf = (data: ReportDetail[]) => {
+export const useGeneratePdf = (data: ReportDetail[], startDate: Date, endDate: Date) => {
     const doc = new jsPDF('landscape')
     const tableData: RowInput[] = data.map((item) => {
         return [
@@ -38,5 +38,5 @@ export const useGeneratePdf = (data: ReportDetail[]) => {
         body: tableData,
       })
     
-    doc.save(`${getFileName(useNow().value)}.pdf`)
+    doc.save(`${getFileName(startDate, endDate)}.pdf`)
 }

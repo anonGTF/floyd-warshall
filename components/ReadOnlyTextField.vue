@@ -8,11 +8,12 @@
           <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <Icon v-if="props.leadingIcon != ''" :name="props.leadingIcon" class="text-2xl" />
           </div>
-          <label :class="`input input-bordered bg-white w-full flex items-center focus:outline-transparent focus:border-black ${leadingSpacing}`" >
+          <label :class="`input input-bordered bg-white w-full flex items-center focus:outline-transparent focus:border-black ${leadingSpacing} ${clickableClass}`" >
             <input 
               :value="text"
               readonly
               class="grow"
+              :class="{'cursor-pointer': props.clickable}"
             />
             <Icon 
               v-if="trailingIcon != ''" 
@@ -44,7 +45,11 @@ const props = defineProps({
   trailingIcon: {
     type: String,
     default: ''
-  }
+  },
+  clickable: {
+    type: Boolean,
+    default: false
+  },
 })
 
 defineEmits([
@@ -52,5 +57,6 @@ defineEmits([
 ])
 
 const leadingSpacing = computed(() => props.leadingIcon !== '' ? 'ps-11' : '')
+const clickableClass = computed(() => props.clickable ? "cursor-pointer" : "")
 
 </script>

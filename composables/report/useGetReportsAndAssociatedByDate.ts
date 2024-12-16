@@ -2,14 +2,11 @@ import { collection, doc, getDoc, getDocs, query, where } from "firebase/firesto
 import type { ReportDetail } from "~/models/report/ReportDetail";
 import type { Report } from "~/models/report/Report";
 
-export const useGetReportsAndAssociatedByDate = async (): Promise<Either<string, ReportDetail[]>> => {
+export const useGetReportsAndAssociatedByDate = async (startDate: Date, endDate: Date): Promise<Either<string, ReportDetail[]>> => {
     try {
         const db = useFirestore()
-        const now = new Date()
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
         const collectionRef = collection(db, REPORT_CONSTANTS.collectionName)
-        const queryRef = query(collectionRef, where(REPORT_CONSTANTS.createdAtAttr, ">=", startOfMonth))
-
+        const queryRef = query(collectionRef, where(REPORT_CONSTANTS.createdAtAttr, ">=", startDate), where(REPORT_CONSTANTS.createdAtAttr, "<=", endDate))
         const snapshots = await getDocs(queryRef)
         const reportsJob = snapshots.docs.map(async (reportDoc) => {
             const reportData = reportDoc.data()

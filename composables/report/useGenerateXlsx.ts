@@ -1,6 +1,6 @@
 import writeXlsxFile from "write-excel-file";
 
-export const useGenerateXlsx = async (data: ReportDetail[]) => {
+export const useGenerateXlsx = async (data: ReportDetail[], startDate: Date, endDate: Date) => {
     const schema = [
         {
             column: 'Judul Laporan',
@@ -80,6 +80,6 @@ export const useGenerateXlsx = async (data: ReportDetail[]) => {
     
     await writeXlsxFile(data, {
         schema,
-        fileName: `${getFileName(useNow().value)}.xlsx`,
+        fileName: `${getFileName(startDate, endDate)}.xlsx`,
     });
 }

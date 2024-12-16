@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     'pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/leaflet',
+    '@samk-dev/nuxt-vcalendar',
     '@pinia/nuxt'
   ],
 
